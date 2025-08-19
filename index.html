@@ -1,41 +1,617 @@
-<div class="gem-card">
-    <!-- ---- Front of the card (what you already have) ---- -->
-    <div class="card-face card-front">
-        <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1600721391689-2564bb8055de?…"
-                 alt="Green Aventurine">
-            <div class="gem-name">Emerald Forest Pendant</div>
-        </div>
-
-        <div class="card-content">
-            <div class="gem-type"><i class="far fa-gem"></i> Green Aventurine</div>
-            <p class="gem-description">Enchanted by forest trails …</p>
-
-            <div class="gem-properties">
-                <div class="property">6.5‑7 Mohs</div>
-                <div class="property">12 mm Round</div>
-                <div class="property">Copper</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Willow & Copper | Gemstone Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(135deg, #f8f4e9 0%, #e6d3b3 100%);
+            color: #5a3921;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,20 Q40,15 60,20 Q80,25 80,40 Q85,60 80,80 Q75,95 60,80 Q40,85 20,80 Q5,75 20,60 Q15,40 20,20' fill='none' stroke='%23b87333' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 200px;
+            z-index: 0;
+        }
+        
+        .logo {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            color: #5a3921;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        
+        .logo span {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.4rem;
+            color: #b87333;
+            display: block;
+            margin-top: -10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 15px auto 0;
+            color: #2a5a2a;
+            position: relative;
+            padding-top: 15px;
+        }
+        
+        .tagline::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #b87333, transparent);
+        }
+        
+        /* Navigation */
+        nav {
+            background: rgba(90, 57, 33, 0.9);
+            border-radius: 50px;
+            max-width: 800px;
+            margin: 25px auto;
+            padding: 12px 30px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: #f7f1e1;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        nav a:hover, nav a.active {
+            background: #b87333;
+            color: white;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            padding: 40px 0 60px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #5a3921;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #b87333, transparent);
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .gem-card {
+            background: #f7f1e1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .gem-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-image {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gem-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        .gem-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(42, 90, 42, 0.9));
+            padding: 20px 15px 10px;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+        }
+        
+        .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .gem-type {
+            color: #b87333;
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .gem-description {
+            color: #5a3921;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .gem-properties {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+        
+        .property {
+            background: rgba(184, 115, 51, 0.1);
+            border: 1px solid rgba(184, 115, 51, 0.2);
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.85rem;
+            color: #5a3921;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #b87333;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #b87333;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: #b87333;
+        }
+        
+        .btn i {
+            margin-left: 5px;
+        }
+        
+        /* About Section */
+        .about {
+            background: rgba(247, 241, 225, 0.7);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,20 Q40,15 60,20 Q80,25 80,40 Q85,60 80,80 Q75,95 60,80 Q40,85 20,80 Q5,75 20,60 Q15,40 20,20' fill='none' stroke='%23b87333' stroke-width='1' opacity='0.1'/%3E%3C/svg%3E");
+            background-size: contain;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .about-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #5a3921;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .about p {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            text-align: center;
+            color: #b87333;
+            margin-top: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(90, 57, 33, 0.9);
+            color: #f7f1e1;
+            padding: 40px 0 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #d4b98a;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: #b87333;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #b87333;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: #d4b98a;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(180, 150, 100, 0.3);
+            font-size: 0.9rem;
+            color: #d4b98a;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Logo -->
+        <header>
+            <div class="header-bg"></div>
+            <div class="logo">
+                <h1>Willow & Copper</h1>
+                <span>Gemstone Artistry</span>
             </div>
-
-            <a href="gem001.html" class="btn">View Details <i class="fas fa-arrow‑right"></i></a>
-        </div>
+            <p class="tagline">Each piece tells a story - handcrafted jewelry inspired by nature's beauty</p>
+        </header>
+        
+        <!-- Navigation -->
+        <nav>
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="far fa-gem"></i> Collection</a></li>
+                <li><a href="#"><i class="fas fa-history"></i> Our Story</a></li>
+                <li><a href="#"><i class="fas fa-map-marker-alt"></i> Find Us</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Gemstone Gallery -->
+        <section class="gallery">
+            <h2 class="section-title">Gemstone Collection</h2>
+            
+            <div class="cards-grid">
+                <!-- Green Aventurine Card -->
+                <div class="gem-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1600721391689-2564bb8055de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Green Aventurine">
+                        <div class="gem-name">Emerald Forest Pendant</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="gem-type"><i class="far fa-gem"></i> Green Aventurine</div>
+                        <p class="gem-description">Enchanted by forest trails and forgotten streams, this stone is hand-wrapped in flowing copper wire, inviting harmony into everyday life.</p>
+                        <div class="gem-properties">
+                            <div class="property">6.5-7 Mohs</div>
+                            <div class="property">12mm Round</div>
+                            <div class="property">Copper</div>
+                        </div>
+                        <a href="gem001.html" class="btn">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Amethyst Card -->
+                <div class="gem-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1599640842225-85d111c20e42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Amethyst">
+                        <div class="gem-name">Lavender Dream Pendant</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="gem-type"><i class="far fa-gem"></i> Amethyst</div>
+                        <p class="gem-description">Inspired by twilight skies, this serene amethyst is wrapped in silver-toned wire to enhance its natural calming properties.</p>
+                        <div class="gem-properties">
+                            <div class="property">7 Mohs</div>
+                            <div class="property">10mm Teardrop</div>
+                            <div class="property">Silver</div>
+                        </div>
+                        <a href="#" class="btn">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Rose Quartz Card -->
+                <div class="gem-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1611672585731-fa10603fb9e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Rose Quartz">
+                        <div class="gem-name">Blushing Rose Pendant</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="gem-type"><i class="far fa-gem"></i> Rose Quartz</div>
+                        <p class="gem-description">The stone of universal love, wrapped delicately in rose gold-toned wire to enhance its heart-opening energies.</p>
+                        <div class="gem-properties">
+                            <div class="property">7 Mohs</div>
+                            <div class="property">14mm Oval</div>
+                            <div class="property">Rose Gold</div>
+                        </div>
+                        <a href="#" class="btn">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Labradorite Card -->
+                <div class="gem-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1618835962143-6e56a0e0eb1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Labradorite">
+                        <div class="gem-name">Northern Lights Pendant</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="gem-type"><i class="far fa-gem"></i> Labradorite</div>
+                        <p class="gem-description">Capturing the magic of the aurora borealis, this labradorite stone is wrapped to highlight its captivating flashes of color.</p>
+                        <div class="gem-properties">
+                            <div class="property">6-6.5 Mohs</div>
+                            <div class="property">15mm Freeform</div>
+                            <div class="property">Bronze</div>
+                        </div>
+                        <a href="#" class="btn">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Citrine Card -->
+                <div class="gem-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1605102108546-0d08a78d0d26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Citrine">
+                        <div class="gem-name">Golden Sun Pendant</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="gem-type"><i class="far fa-gem"></i> Citrine</div>
+                        <p class="gem-description">Radiating warmth and positivity, this sunny citrine is wrapped in golden wire to amplify its manifestation properties.</p>
+                        <div class="gem-properties">
+                            <div class="property">7 Mohs</div>
+                            <div class="property">12mm Round</div>
+                            <div class="property">Gold</div>
+                        </div>
+                        <a href="#" class="btn">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Moonstone Card -->
+                <div class="gem-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1605102108546-0d08a78d0d26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80" alt="Moonstone">
+                        <div class="gem-name">Lunar Glow Pendant</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="gem-type"><i class="far fa-gem"></i> Moonstone</div>
+                        <p class="gem-description">With its ethereal glow, this moonstone is wrapped in sterling silver to enhance its connection to feminine energy and intuition.</p>
+                        <div class="gem-properties">
+                            <div class="property">6-6.5 Mohs</div>
+                            <div class="property">10mm Cabochon</div>
+                            <div class="property">Silver</div>
+                        </div>
+                        <a href="#" class="btn">View Details <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section class="about">
+            <div class="about-content">
+                <h2>The Artisan's Touch</h2>
+                <p>At Willow & Copper, each gemstone is more than just a beautiful stone - it's a piece of nature transformed by skilled hands into wearable art. Our artisan Mira carefully selects each stone for its unique energy and beauty, then hand-wraps it in fine metal to create jewelry that resonates with both aesthetic and spiritual harmony.</p>
+                <p>Inspired by the beauty of the natural world, our collection brings the tranquility of forests, the energy of flowing water, and the magic of sunlight into everyday adornment. Each piece is crafted with intention, designed to not only enhance your style but also to connect you with the earth's natural energies.</p>
+                <div class="signature">Gretchen</div>
+            </div>
+        </section>
     </div>
-
-    <!-- ---- Back of the card (new) ---- -->
-    <div class="card-face card-back">
-        <div class="back-content">
-            <h3 class="back-title">Emerald Forest Pendant</h3>
-            <p class="back-text">
-                <strong>Meaning:</strong> Harmony, renewal and the soothing energy of nature.
-                <br><br>
-                <strong>Care:</strong> Clean gently with a soft cloth and keep away from harsh chemicals.
-                <br><br>
-                <strong>Dimensions:</strong> 12 mm round stone set in hand‑wrapped copper.
-            </p>
-
-            <a href="gem001.html" class="btn back-btn">
-                More Details <i class="fas fa-arrow-right"></i>
-            </a>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div><i class="fas fa-map-marker-alt"></i> 123 Forest Path, Woodland, WA</div>
+                    <div><i class="fas fa-phone"></i> (555) 123-4567</div>
+                    <div><i class="fas fa-envelope"></i> gretchen@willowandcopper.com</div>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p>Join our community of gemstone lovers</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#"><i class="fab fa-etsy"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe for new collections and special offers</p>
+                <form style="margin-top: 15px;">
+                    <input type="email" placeholder="Your email" style="padding: 10px; width: 100%; max-width: 250px; border-radius: 30px; border: none; margin-bottom: 10px;">
+                    <button class="btn" style="width: 100%; max-width: 250px;">Subscribe</button>
+                </form>
+            </div>
         </div>
-    </div>
-</div>
+        
+        <div class="copyright">
+            &copy; 2023 Willow & Copper | Handcrafted with intention
+        </div>
+    </footer>
+</body>
+</html>

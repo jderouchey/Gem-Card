@@ -1,2 +1,2 @@
-# Gems-Cards
+# Gem-Card
 Listing info about the gems and making a physical card for the buyer.  

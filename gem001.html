@@ -1,379 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF‑8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Willow & Copper - Gemstone Card Template</title>
+    <title>Willow &amp; Copper – Emerald Forest Pendant Card</title>
+
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
-        * {
+        /* -------------------------------------------------
+           Design Tokens (CSS custom properties)
+        ------------------------------------------------- */
+        :root {
+            /* Colours */
+            --c-bg        : #f7f1e1;          /* warm cream */
+            --c-paper    : #e6d3b3;          /* page background */
+            --c-accent   : #b87333;          /* copper */
+            --c-green    : #2a5a2a;          /* deep forest */
+            --c-text     : #5a3921;          /* dark brown */
+            --c-border   : #d4b98a;          /* light tan */
+
+            /* Typography */
+            --ff-primary : 'Raleway', sans-serif;
+            --ff-display : 'Playfair Display', serif;
+            --ff-cursive : 'Great Vibes', cursive;
+
+            /* Layout */
+            --card-w     : 350px;
+            --card-h     : 500px;
+            --radius     : 2mm;
+            --gap        : 1.5rem;
+        }
+
+        /* -------------------------------------------------
+           Global reset & basic layout
+        ------------------------------------------------- */
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
-        
+
+        html { font-size: 16px; }
+
         body {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
-            background: linear-gradient(135deg, #e6d3b3 0%, #d4b98a 100%);
-            font-family: 'Raleway', sans-serif;
-            padding: 20px;
+            background: linear-gradient(135deg, var(--c-paper) 0%, var(--c-border) 100%);
+            font-family: var(--ff-primary);
+            padding: 2rem var(--gap);
+            line-height: 1.5;
+            color: var(--c-text);
         }
-        
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
+
+        /* -------------------------------------------------
+           Container & Card layout
+        ------------------------------------------------- */
+        .wrapper {
             max-width: 1000px;
             width: 100%;
-        }
-        
-        .card-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .card {
-            width: 350px;
-            height: 500px;
-            border-radius: 2mm;
-            position: relative;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
-        }
-        
-        /* Front Card Styles */
-        .front {
-            background: #f7f1e1; /* Warm cream background */
             display: flex;
             flex-direction: column;
-            padding: 25px;
+            gap: var(--gap);
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--gap);
+        }
+
+        .card {
+            width: var(--card-w);
+            height: var(--card-h);
+            border-radius: var(--radius);
             position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,.25);
+            background: var(--c-bg);
         }
-        
-        .copper-emboss {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
+
+        /* -------------------------------------------------
+           Front of the card
+        ------------------------------------------------- */
+        .card--front {
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
         }
-        
-        .corner-filigree {
+
+        .filigree {
             position: absolute;
             width: 60px;
             height: 60px;
-            opacity: 0.8;
+            opacity: .8;
+            pointer-events: none;
         }
-        
-        .top-left {
-            top: 10px;
-            left: 10px;
-            transform: rotate(0deg);
+
+        .filigree[data-pos="tl"] { top: .6rem; left: .6rem; transform: rotate(0);   }
+        .filigree[data-pos="tr"] { top: .6rem; right: .6rem; transform: rotate(90deg); }
+        .filigree[data-pos="bl"] { bottom: .6rem; left: .6rem; transform: rotate(270deg); }
+        .filigree[data-pos="br"] { bottom: .6rem; right: .6rem; transform: rotate(180deg); }
+
+        .filigree svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--c-accent);
         }
-        
-        .top-right {
-            top: 10px;
-            right: 10px;
-            transform: rotate(90deg);
-        }
-        
-        .bottom-left {
-            bottom: 10px;
-            left: 10px;
-            transform: rotate(270deg);
-        }
-        
-        .bottom-right {
-            bottom: 10px;
-            right: 10px;
-            transform: rotate(180deg);
-        }
-        
+
         .logo {
             text-align: center;
-            margin-top: 20px;
-            color: #b87333; /* Copper color */
-            font-family: 'Playfair Display', serif;
+            margin-top: .5rem;
+            font-family: var(--ff-display);
             font-weight: 500;
             font-size: 1.8rem;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(184, 115, 51, 0.2);
+            letter-spacing: .1em;
+            color: var(--c-accent);
+            text-shadow: 0 2px 4px rgba(184,115,51,.2);
         }
-        
+
         .pendant-name {
-            font-family: 'Great Vibes', cursive;
+            font-family: var(--ff-cursive);
             font-size: 2.4rem;
             text-align: center;
-            margin: 15px 0 30px;
-            color: #2a5a2a;
+            margin: 1rem 0 2rem;
+            color: var(--c-green);
             position: relative;
-            z-index: 2;
         }
-        
+
         .pendant-name::after {
             content: "";
             display: block;
-            width: 100px;
+            width: 6rem;
             height: 1px;
-            background: #b87333;
-            margin: 5px auto;
-            opacity: 0.5;
+            background: var(--c-accent);
+            margin: .4rem auto;
+            opacity: .5;
         }
-        
+
         .botanical-border {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.15;
-            z-index: 1;
+            inset: 0;
+            opacity: .15;
+            pointer-events: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 500'%3E%3Cpath d='M50,30 Q100,0 150,30 Q200,60 250,40 Q300,20 320,50' stroke='%232a5a2a' fill='none' stroke-width='1.5'/%3E%3Cpath d='M20,80 Q40,50 70,70 Q100,90 120,60 Q140,30 170,50 Q200,70 220,40 Q240,10 270,30 Q300,50 310,80' stroke='%232a5a2a' fill='none' stroke-width='1.5'/%3E%3Cpath d='M40,120 Q70,90 100,110 Q130,130 150,100 Q170,70 200,90 Q230,110 250,80 Q270,50 300,70 Q330,90 330,120' stroke='%232a5a2a' fill='none' stroke-width='1.5'/%3E%3Cpath d='M30,180 Q60,150 90,170 Q120,190 140,160 Q160,130 190,150 Q220,170 240,140 Q260,110 290,130 Q320,150 320,180' stroke='%232a5a2a' fill='none' stroke-width='1.5'/%3E%3Ccircle cx='175' cy='250' r='40' stroke='%232a5a2a' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
         }
-        
+
         .pendant-drawing {
             width: 140px;
             height: 140px;
             margin: 0 auto;
             position: relative;
-            z-index: 2;
         }
-        
+
         .gem {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #7cb76b 0%, #2a5a2a 100%);
+            background: linear-gradient(135deg, #7cb76b 0%, var(--c-green) 100%);
             border-radius: 50%;
             position: absolute;
-            top: 30px;
-            left: 30px;
-            box-shadow: 0 0 15px rgba(42, 90, 42, 0.3);
+            inset: 30px auto auto 30px;
+            box-shadow: 0 0 15px rgba(42,90,42,.3);
         }
-        
+
         .wire {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 2px solid #b87333;
+            inset: 0;
+            border: 2px solid var(--c-accent);
             border-radius: 50%;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            clip-path: inset(0);
         }
-        
-        .wire::before, .wire::after {
+
+        .wire::before,
+        .wire::after {
             content: "";
             position: absolute;
-            width: 80%;
-            height: 80%;
-            border: 2px solid #b87333;
+            inset: 10%;
+            border: 2px solid var(--c-accent);
             border-radius: 50%;
-            top: 10%;
-            left: 10%;
         }
-        
+
         .wire::after {
-            width: 60%;
-            height: 60%;
-            top: 20%;
-            left: 20%;
+            inset: 20%;
         }
-        
+
         .wire-wrap {
             position: absolute;
             width: 30px;
             height: 60px;
-            border: 2px solid #b87333;
+            border: 2px solid var(--c-accent);
             border-radius: 50%;
             top: -10px;
             left: 55px;
             transform: rotate(45deg);
         }
-        
+
         .handcrafted {
+            margin-top: 2.5rem;
             text-align: center;
-            margin-top: 50px;
-            font-family: 'Playfair Display', serif;
+            font-family: var(--ff-display);
             font-size: 1.2rem;
-            color: #5a3921;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 2;
+            color: var(--c-text);
+            letter-spacing: .05rem;
         }
-        
-        /* Back Card Styles */
-        .back {
-            background: #f7f1e1;
-            padding: 25px;
+
+        /* -------------------------------------------------
+           Back of the card
+        ------------------------------------------------- */
+        .card--back {
+            background: var(--c-bg);
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
+            gap: 1rem;
         }
-        
-        .back h1 {
+
+        .card--back h1 {
             text-align: center;
-            font-family: 'Playfair Display', serif;
+            font-family: var(--ff-display);
             font-size: 1.4rem;
-            color: #5a3921;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #b87333;
-            padding-bottom: 10px;
+            color: var(--c-text);
+            border-bottom: 1px solid var(--c-accent);
+            padding-bottom: .5rem;
+            margin-bottom: .5rem;
         }
-        
+
         .details-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
         }
-        
+
+        .details-table th,
+        .details-table td {
+            padding: .4rem 0;
+            vertical-align: top;
+        }
+
         .details-table th {
             text-align: left;
             width: 35%;
             font-weight: 500;
-            padding: 6px 0;
-            color: #5a3921;
-            vertical-align: top;
+            color: var(--c-text);
         }
-        
+
         .details-table td {
-            padding: 6px 0;
-            color: #2a5a2a;
+            color: var(--c-green);
             font-weight: 400;
         }
-        
+
         .section-title {
-            font-family: 'Playfair Display', serif;
+            font-family: var(--ff-display);
             font-size: 1.1rem;
-            color: #b87333;
-            margin: 15px 0 8px;
-            border-bottom: 1px dashed #d4b98a;
-            padding-bottom: 5px;
+            color: var(--c-accent);
+            margin: .75rem 0 .4rem;
+            border-bottom: 1px dashed var(--c-border);
+            padding-bottom: .3rem;
         }
-        
+
         .content {
-            font-size: 0.85rem;
+            font-size: .85rem;
             line-height: 1.5;
-            color: #5a3921;
+            color: var(--c-text);
         }
-        
+
         .content ul {
-            padding-left: 20px;
-            margin: 8px 0;
+            margin: .5rem 0;
+            padding-left: 1.5rem;
         }
-        
+
         .content li {
-            margin-bottom: 5px;
+            margin-bottom: .3rem;
         }
-        
+
+        /* -------------------------------------------------
+           Print instructions (screen‑only)
+        ------------------------------------------------- */
         .print-instructions {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
+            background: #fff;
+            border-radius: .6rem;
+            padding: 1.5rem;
             max-width: 700px;
             margin: 0 auto;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,.1);
         }
-        
+
         .print-instructions h2 {
             text-align: center;
-            color: #5a3921;
-            margin-bottom: 20px;
-            font-family: 'Playfair Display', serif;
+            font-family: var(--ff-display);
+            color: var(--c-text);
+            margin-bottom: 1rem;
         }
-        
+
         .instructions {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
         }
-        
+
         .instruction-box {
-            background: #f7f1e1;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #d4b98a;
+            background: var(--c-bg);
+            padding: 1rem;
+            border-radius: .5rem;
+            border: 1px solid var(--c-border);
         }
-        
+
         .instruction-box h3 {
-            color: #b87333;
-            margin-bottom: 10px;
+            color: var(--c-accent);
+            margin-bottom: .6rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: .5rem;
+            font-size: 1rem;
         }
-        
+
         .instruction-box ul {
-            padding-left: 20px;
+            padding-left: 1.2rem;
         }
-        
+
         .instruction-box li {
-            margin-bottom: 8px;
+            margin-bottom: .5rem;
         }
-        
+
+        /* -------------------------------------------------
+           Print stylesheet
+        ------------------------------------------------- */
         @media print {
             body {
                 background: none;
                 padding: 0;
             }
-            
-            .container, .card-container {
+
+            .wrapper,
+            .cards {
                 display: block;
-                width: 100%;
+                width: auto;
                 height: auto;
             }
-            
+
             .card {
-                width: 3.5in;
-                height: 5in;
+                width: 3.5in;      /* 3.5" */
+                height: 5in;       /* 5"   */
                 page-break-after: always;
                 margin: 0;
                 box-shadow: none;
             }
-            
-            .print-instructions {
-                display: none;
-            }
+
+            .print-instructions { display: none; }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="card-container">
-            <div class="card front">
-                <!-- Copper embossed corners -->
-                <div class="copper-emboss">
-                    <div class="corner-filigree top-left">✤</div>
-                    <div class="corner-filigree top-right">✤</div>
-                    <div class="corner-filigree bottom-left">✤</div>
-                    <div class="corner-filigree bottom-right">✤</div>
+    <div class="wrapper">
+
+        <!-- ------------------- CARDS ------------------- -->
+        <section class="cards" aria-label="Pendant cards">
+
+            <!-- Front side -->
+            <article class="card card--front" role="region" aria-label="Front of Emerald Forest Pendant card">
+
+                <!-- Embossed copper filigree (purely decorative) -->
+                <div class="filigree" data-pos="tl" role="img" aria-label="Copper filigree corner">
+                    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <polygon points="0,0 100,0 100,100 0,100"/>
+                    </svg>
                 </div>
-                
-                <!-- Botanical border -->
-                <div class="botanical-border"></div>
-                
-                <!-- Logo -->
-                <div class="logo">Willow & Copper</div>
-                
+                <div class="filigree" data-pos="tr" role="img" aria-label="Copper filigree corner">
+                    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,0 100,100 0,100"/></svg>
+                </div>
+                <div class="filigree" data-pos="bl" role="img" aria-label="Copper filigree corner">
+                    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,0 100,100 0,100"/></svg>
+                </div>
+                <div class="filigree" data-pos="br" role="img" aria-label="Copper filigree corner">
+                    <svg viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,0 100,100 0,100"/></svg>
+                </div>
+
+                <!-- Botanical overlay -->
+                <div class="botanical-border" aria-hidden="true"></div>
+
+                <!-- Brand -->
+                <header class="logo">Willow &amp; Copper</header>
+
                 <!-- Pendant name -->
-                <div class="pendant-name">Emerald Forest Pendant</div>
-                
-                <!-- Pendant drawing -->
-                <div class="pendant-drawing">
-                    <div class="wire"></div>
-                    <div class="wire-wrap"></div>
-                    <div class="gem"></div>
-                </div>
-                
-                <!-- Handcrafted subtitle -->
-                <div class="handcrafted">Handcrafted Jewelry</div>
-            </div>
-            
-            <div class="card back">
+                <h2 class="pendant-name">Emerald Forest Pendant</h2>
+
+                <!-- Illustration -->
+                <figure class="pendant-drawing" aria-label="Illustration of a copper‑wrapped emerald">
+                    <div class="wire" aria-hidden="true"></div>
+                    <div class="wire-wrap" aria-hidden="true"></div>
+                    <div class="gem" aria-hidden="true"></div>
+                </figure>
+
+                <!-- Sub‑title -->
+                <p class="handcrafted">Handcrafted Jewelry</p>
+            </article>
+
+            <!-- Back side -->
+            <article class="card card--back" role="region" aria-label="Back of Emerald Forest Pendant card">
                 <h1>Gemstone Details</h1>
-                
+
                 <table class="details-table">
                     <tr>
                         <th>Gemstone</th>
@@ -388,66 +417,72 @@
                         <td>6.5–7</td>
                     </tr>
                     <tr>
-                        <th>Size & Shape</th>
-                        <td>12 mm round cabochon</td>
+                        <th>Size &amp; Shape</th>
+                        <td>12 mm round cabochon</td>
                     </tr>
                     <tr>
-                        <th>Wire Wrap Metal</th>
+                        <th>Wire‑wrap Metal</th>
                         <td>Pure copper</td>
                     </tr>
                 </table>
-                
-                <div class="section-title">Artisan Story</div>
-                <div class="content">
-                    Enchanted by forest trails and forgotten streams, our artisan, Mira, hand-wraps each Aventurine stone in flowing copper wire. The copper's warmth mirrors the light-catching flashes within the gem, inviting harmony and abundance into everyday life.
-                </div>
-                
-                <div class="section-title">Metaphysical Properties</div>
-                <div class="content">
-                    <ul>
+
+                <section>
+                    <h2 class="section-title">Artisan Story</h2>
+                    <p class="content">
+                        Enchanted by forest trails and forgotten streams, our artisan, Mira, hand‑wraps each Aventurine stone in flowing copper wire. The copper's warmth mirrors the light‑catching flashes within the gem, inviting harmony and abundance into everyday life.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="section-title">Metaphysical Properties</h2>
+                    <ul class="content">
                         <li>Promotes optimism and confidence</li>
-                        <li>Enhances creativity and decision-making</li>
+                        <li>Enhances creativity and decision‑making</li>
                         <li>Balances the Heart Chakra</li>
                     </ul>
-                </div>
-                
-                <div class="section-title">Care Instructions</div>
-                <div class="content">
-                    <ul>
+                </section>
+
+                <section>
+                    <h2 class="section-title">Care Instructions</h2>
+                    <ul class="content">
                         <li>Avoid water and chemicals</li>
                         <li>Wipe gently with a soft, dry cloth</li>
                         <li>Store in a separate pouch to prevent scratching</li>
                     </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div class="print-instructions">
+                </section>
+            </article>
+        </section>
+
+        <!-- ------------------- PRINT INSTRUCTIONS ------------------- -->
+        <section class="print-instructions" aria-label="How to print the cards">
             <h2>Printing Instructions</h2>
             <div class="instructions">
-                <div class="instruction-box">
+
+                <article class="instruction-box">
                     <h3>🖨️ How to Print</h3>
                     <ul>
-                        <li>Click "Print" in your browser (Ctrl+P or Cmd+P)</li>
-                        <li>Set paper size to 3.5" × 5"</li>
-                        <li>Select "Actual size" or 100% scale</li>
-                        <li>Use heavy cardstock paper (110-130 lb)</li>
-                        <li>Print both sides (flip on short edge)</li>
+                        <li>Press <kbd>Ctrl+P</kbd> (Windows) or <kbd>⌘+P</kbd> (macOS)</li>
+                        <li>Paper size: <strong>3.5" × 5"</strong></li>
+                        <li>Scale: <strong>100 % (Actual size)</strong></li>
+                        <li>Use heavy cardstock (110–130 lb/300–450 gsm)</li>
+                        <li>Print both sides, flipping on the short edge</li>
                     </ul>
-                </div>
-                <div class="instruction-box">
+                </article>
+
+                <article class="instruction-box">
                     <h3>🎨 Design Features</h3>
                     <ul>
-                        <li>Warm cream background color</li>
-                        <li>Copper foil effect for logo</li>
-                        <li>Forest green botanical border</li>
-                        <li>Embossed copper corners</li>
-                        <li>2mm rounded corners</li>
-                        <li>Elegant typography throughout</li>
+                        <li>Warm cream background</li>
+                        <li>Copper foil‑effect for logo & corners</li>
+                        <li>Forest‑green botanical border</li>
+                        <li>2 mm rounded corners</li>
+                        <li>Elegant typography (Playfair Display, Great Vibes, Raleway)</li>
                     </ul>
-                </div>
+                </article>
+
             </div>
-        </div>
+        </section>
+
     </div>
 </body>
 </html>
